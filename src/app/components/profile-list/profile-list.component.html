@@ -1,0 +1,21 @@
+<!-- Header Section (Profiles Heading and Search Bar) -->
+<div class="header">
+  <h2 class="profiles-heading">Profiles</h2>
+  <input type="text" [(ngModel)]="searchQuery" placeholder="Search profiles" (input)="filterProfiles()" class="search-bar">
+</div>
+
+<!-- Profile List -->
+<div class="profile-list">
+  <div *ngFor="let profile of filteredProfiles" class="profile-card">
+    <img [src]="profile.photoUrl" alt="{{ profile.name }}" class="profile-photo" />
+    <h3>{{ profile.name }}</h3>
+    <p>{{ profile.description }}</p>
+    <div class="profile-buttons">
+      <button mat-button color="primary" [routerLink]="['/profile', profile.id]">View Details</button>
+      <button mat-button color="primary" (click)="viewOnMap(profile)">View on Map</button>
+    </div>
+  </div>
+</div>
+
+<!-- Map container -->
+<div *ngIf="isMapVisible" id="map" style="height: 400px;"></div>
